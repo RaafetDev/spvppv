@@ -31,7 +31,7 @@ RUN mkdir -p /root/.vnc && \
     echo "password" | vncpasswd -f > /root/.vnc/passwd && \
     chmod 600 /root/.vnc/passwd
 
-# Create xstartup file - must not exit immediately
+# Create xstartup file
 RUN echo '#!/bin/bash' > /root/.vnc/xstartup && \
     echo 'unset SESSION_MANAGER' >> /root/.vnc/xstartup && \
     echo 'unset DBUS_SESSION_BUS_ADDRESS' >> /root/.vnc/xstartup && \
@@ -49,7 +49,7 @@ RUN echo '#!/bin/bash' > /start.sh && \
     echo '' >> /start.sh && \
     echo '# Start VNC server' >> /start.sh && \
     echo 'echo "Starting VNC server..."' >> /start.sh && \
-    echo 'vncserver :1 -geometry 1280x720 -depth 24 -SecurityTypes None -rfbport 5901 -localhost no --I-KNOW-THIS-IS-INSECURE' >> /start.sh && \
+    echo 'vncserver :1 -geometry 1280x720 -depth 24 -SecurityTypes None -rfbport 5901 -localhost yes --I-KNOW-THIS-IS-INSECURE' >> /start.sh && \
     echo '' >> /start.sh && \
     echo '# Wait for VNC to be ready' >> /start.sh && \
     echo 'sleep 5' >> /start.sh && \
@@ -65,7 +65,7 @@ RUN echo '#!/bin/bash' > /start.sh && \
     echo 'echo "Starting noVNC web server..."' >> /start.sh && \
     echo 'cd /usr/share/novnc' >> /start.sh && \
     echo 'ln -sf vnc.html index.html' >> /start.sh && \
-    echo 'exec /usr/bin/websockify --web /usr/share/novnc 8080 localhost:5901' >> /start.sh && \
+    echo 'exec /usr/bin/websockify --web /usr/share/novnc 8080 127.0.0.1:5901' >> /start.sh && \
     chmod +x /start.sh
 
 # Expose noVNC port
