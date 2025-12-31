@@ -49,7 +49,7 @@ RUN echo '#!/bin/bash' > /start.sh && \
     echo '' >> /start.sh && \
     echo '# Start VNC server' >> /start.sh && \
     echo 'echo "Starting VNC server..."' >> /start.sh && \
-    echo 'vncserver :1 -geometry 1280x720 -depth 24 -SecurityTypes None -rfbport 5901 -localhost no' >> /start.sh && \
+    echo 'vncserver :1 -geometry 1280x720 -depth 24 -SecurityTypes None -rfbport 5901 -localhost no --I-KNOW-THIS-IS-INSECURE' >> /start.sh && \
     echo '' >> /start.sh && \
     echo '# Wait for VNC to be ready' >> /start.sh && \
     echo 'sleep 5' >> /start.sh && \
